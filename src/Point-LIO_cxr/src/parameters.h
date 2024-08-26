@@ -1,0 +1,43 @@
+// #ifndef PARAM_H
+// #define PARAM_H
+#pragma once
+// #include <ros/ros.h>
+#include "rclcpp/rclcpp.hpp"
+#include <Eigen/Eigen>
+#include <Eigen/Core>
+#include <cstring>
+#include "preprocess.h"
+
+extern bool is_first_frame;
+extern bool prop_at_freq_of_imu, check_satu, con_frame, cut_frame;
+extern bool use_imu_as_input, space_down_sample;
+extern bool extrinsic_est_en, publish_odometry_without_downsample;
+extern bool   imu_en, gravity_align, non_station_start;
+extern bool   runtime_pos_log, pcd_save_en, path_en;
+extern bool   scan_pub_en, scan_body_pub_en;
+extern bool use_pcd_map_;
+extern double lidar_end_time, first_lidar_time, time_con;
+extern double last_timestamp_lidar, last_timestamp_imu;
+extern double match_s, satu_acc, satu_gyro, cut_frame_time_interval;
+extern double filter_size_surf_min, filter_size_map_min, fov_deg;
+extern double cube_len; 
+extern double imu_time_inte;
+extern double laser_point_cov, acc_norm;
+extern double acc_cov_input, gyr_cov_input, vel_cov;
+extern double gyr_cov_output, acc_cov_output, b_gyr_cov, b_acc_cov;
+extern double imu_meas_acc_cov, imu_meas_omg_cov; 
+extern double init_x_;
+extern double init_y_;
+extern double init_z_;
+extern double time_lag_imu_to_lidar;
+extern float  plane_thr;
+extern float  DET_RANGE;
+extern int pcd_index;
+extern int  init_map_size, con_frame_num;
+extern int    lidar_type, pcd_save_interval;
+extern std::string lid_topic, imu_topic,task;
+extern std::vector<double> gravity_init, gravity;
+extern std::vector<double> extrinT;
+extern std::vector<double> extrinR;
+extern shared_ptr<Preprocess> p_pre;
+extern string priorPCDMapPath;
