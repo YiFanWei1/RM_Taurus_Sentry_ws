@@ -96,6 +96,7 @@ NavigateThroughPosesNavigator::goalCompleted(
 void
 NavigateThroughPosesNavigator::onLoop()
 {
+    RCLCPP_ERROR(logger_,"onLoop!!!!!!!!!!!!!!!!!!!!!!");
   using namespace nav2_util::geometry_utils;  // NOLINT
 
   // action server feedback (pose, duration of task,
@@ -176,6 +177,7 @@ NavigateThroughPosesNavigator::onLoop()
 void
 NavigateThroughPosesNavigator::onPreempt(ActionT::Goal::ConstSharedPtr goal)
 {
+    RCLCPP_ERROR(logger_,"onPreempt!!!!!!!!!!!!!!!!!!!!!!");
   RCLCPP_INFO(logger_, "Received goal preemption request");
 
   if (goal->behavior_tree == bt_action_server_->getCurrentBTFilename() ||

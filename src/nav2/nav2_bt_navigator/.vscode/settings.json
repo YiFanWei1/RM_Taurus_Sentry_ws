@@ -1,0 +1,38 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/robot_localization/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/rm_decision/lib/python3.10/site-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/rm_decision_interfaces/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/localization_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/fast_lio/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/duckietown_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/robot_localization/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/rm_decision/lib/python3.10/site-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/rm_decision_interfaces/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/localization_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/fast_lio/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/duckietown_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/robot_localization/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/rm_decision/lib/python3.10/site-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/rm_decision_interfaces/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/localization_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/fast_lio/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/home/wei/github_code/auto_sentry_mid360_ws/install/duckietown_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/robot_localization/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/rm_decision/lib/python3.10/site-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/rm_decision_interfaces/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/localization_interface/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/fast_lio/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/home/wei/a/code/pb_rmsimulation/install/duckietown_interface/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

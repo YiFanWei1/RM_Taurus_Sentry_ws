@@ -1,8 +1,0 @@
-/RemovePointcloud: #类中节点名
-  ros__parameters: 
-    dis_diff: 0.12
-    # filename: "/home/auto/test_rmuc_17.pcd" 
-    filename: "/home/auto/test_rmuc_17_sample.pcd" 
-    # filename: "/home/auto/code/PCD/new_gongxun_5.pcd" 
-    #/home/auto/github_code/auto_sentry_ws/file/test_rmuc_17.pcd
-    #/home/auto/code/PCD/test_13_sample_2.pcd

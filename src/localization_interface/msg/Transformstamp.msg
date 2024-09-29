@@ -1,0 +1,7 @@
+float32 transform_translation_x
+float32 transform_translation_y
+float32 transform_translation_z
+float32 tfodom_basetransform_rotation_w
+float32 tfodom_baseransform_rotation_x
+float32 tfodom_basetransform_rotation_y
+float32 tfodom_basetransform_rotation_z

@@ -72,8 +72,8 @@ public:
    */
   void startNavigating(const std::string & navigator_name)
   {
-    std::scoped_lock l(mutex_);
-    if (!current_navigator_.empty()) {
+    std::scoped_lock l(mutex_);//确保线程安全
+    if (!current_navigator_.empty()) {//如果current_navigator_不为空，表示已有一个导航任务在进行中
       RCLCPP_ERROR(
         rclcpp::get_logger("NavigatorMutex"),
         "Major error! Navigation requested while another navigation"
@@ -158,12 +158,28 @@ public:
     // Create the Behavior Tree Action Server for this navigator
     bt_action_server_ = std::make_unique<nav2_behavior_tree::BtActionServer<ActionT>>(
       node,
-      getName(),
+      getName(),//yes,对应navigate_to_pose的self_client_
+      // "getName()",
       plugin_lib_names,
       default_bt_xml_filename,
+      
+      //客户端向服务端发送请求时，首先会触发onGoalReceived回调，随后根据动作的执行情况，可能会周期性地触发onLoop回调。、
+      //如果在处理当前目标时收到了另一个目标请求，可能会触发onPreempt回调。最后，无论是成功完成还是失败，都会在目标处理结束时触发onCompletion回调。
+
+      //当动作服务器接收到一个新的目标请求时，就会调用这个回调函数。
+      //它用于初始化处理新目标的逻辑，比如设置初始状态或验证目标的有效性。仅在新目标到达时调用一次。
       std::bind(&Navigator::onGoalReceived, this, std::placeholders::_1),
+
+      //这个回调函数在动作服务器的执行循环中反复调用。它主要用于进行状态检查、更新任务进度或处理持续的任务逻辑。
+      //只要动作服务器正在处理一个目标，这个函数就会根据设定的循环频率被周期性地调用。
       std::bind(&Navigator::onLoop, this),
+
+      //当一个新的目标请求打断当前正在处理的目标时，就会调用这个回调函数。
+      //它允许动作服务器处理抢占逻辑，如保存当前任务状态、清理资源或准备接受新的目标。只有在发生抢占时才会调用。
       std::bind(&Navigator::onPreempt, this, std::placeholders::_1),
+
+      //当动作服务器完成目标的处理，无论是成功完成还是因为某些原因失败，都会调用这个回调函数。
+      //它用于执行清理操作、设置最终状态、反馈结果给客户端。每个目标完成（或取消）后调用一次。
       std::bind(&Navigator::onCompletion, this, std::placeholders::_1, std::placeholders::_2));
 
     bool ok = true;
@@ -248,7 +264,8 @@ protected:
    */
   bool onGoalReceived(typename ActionT::Goal::ConstSharedPtr goal)
   {
-    if (plugin_muxer_->isNavigating()) {
+    RCLCPP_ERROR(logger_,"onGoalReceived!!!!!!!!!!!!!!!!!!!!!!");
+    if (plugin_muxer_->isNavigating()) {//没进
       RCLCPP_ERROR(
         logger_,
         "Requested navigation from %s while another navigator is processing,"
@@ -272,6 +289,7 @@ protected:
     typename ActionT::Result::SharedPtr result,
     const nav2_behavior_tree::BtStatus final_bt_status)
   {
+    RCLCPP_ERROR(logger_,"onCompletion!!!!!!!!!!!!!!!!!!!!!!");
     plugin_muxer_->stopNavigating(getName());
     goalCompleted(result, final_bt_status);
   }

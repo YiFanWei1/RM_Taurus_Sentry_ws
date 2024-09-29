@@ -22,14 +22,12 @@ def generate_launch_description():
 
     )
     node_params = os.path.join(
-        get_package_share_directory('remove_pointcloud'), 'config', 'RMUC.yaml')
+        get_package_share_directory('remove_pointcloud'), 'config', 'remove_pointcloud.yaml')
     remove_pointcloud_node_ = Node(
         package='remove_pointcloud',
         executable='remove_pointcloud_node',
         output='screen',
-        parameters=[node_params],
-        respawn=True,
-        respawn_delay=1,)
+        parameters=[node_params])
     
     return LaunchDescription([
         remove_pointcloud_node_,

@@ -1,0 +1,5 @@
+float64 max_x_speed
+float64 max_y_speed
+float64 set_yaw_speed
+---
+int64 sum

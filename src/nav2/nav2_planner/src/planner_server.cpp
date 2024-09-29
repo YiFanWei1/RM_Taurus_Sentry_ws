@@ -458,14 +458,16 @@ PlannerServer::computePlanThroughPoses()
 }
 
 void
-PlannerServer::computePlan()
+PlannerServer::computePlan()//会因为行为树的client发送请求而一直被调用
 {
+  // RCLCPP_INFO(get_logger(),"computePlan()");//只要存在goal_pose就会一直被执行，实际上并不会，当到达了终点（Goal succeeded）了就不会执行了。
+
   std::lock_guard<std::mutex> lock(dynamic_params_lock_);
 
   auto start_time = steady_clock_.now();
 
   // Initialize the ComputePathToPose goal and result
-  auto goal = action_server_pose_->get_current_goal();
+  auto goal = action_server_pose_->get_current_goal();//获得当前系统里面的goal_pose,那边只是更新状态，这边才是真正的计算出plan
   auto result = std::make_shared<ActionToPose::Result>();
 
   try {
@@ -485,6 +487,7 @@ PlannerServer::computePlan()
 
     // Transform them into the global frame
     geometry_msgs::msg::PoseStamped goal_pose = goal->goal;
+    // RCLCPP_INFO(get_logger(),"goal->goal.pose.position.x: %f, goal->goal.pose.position.y: %f",goal->goal.pose.position.x,goal->goal.pose.position.y);
     if (!transformPosesToGlobalFrame(action_server_pose_, start, goal_pose)) {
       return;
     }
@@ -529,16 +532,22 @@ PlannerServer::getPlan(
     "(%.2f, %.2f).", start.pose.position.x, start.pose.position.y,
     goal.pose.position.x, goal.pose.position.y);
 
-  if (planners_.find(planner_id) != planners_.end()) {
-    return planners_[planner_id]->createPlan(start, goal);
-  } else {
-    if (planners_.size() == 1 && planner_id.empty()) {
+  if (planners_.find(planner_id) != planners_.end()) 
+  {
+    return planners_[planner_id]->createPlan(start, goal);//在nav2_navfn_planner功能包里面调用了createPlan这个函数进行全局路径规划
+  } 
+  else 
+  {
+    if (planners_.size() == 1 && planner_id.empty()) 
+    {
       RCLCPP_WARN_ONCE(
-        get_logger(), "No planners specified in action call. "
+        get_logger(), "No planners specified in action call. "  
         "Server will use only plugin %s in server."
         " This warning will appear once.", planner_ids_concat_.c_str());
       return planners_[planners_.begin()->first]->createPlan(start, goal);
-    } else {
+    } 
+    else 
+    {
       RCLCPP_ERROR(
         get_logger(), "planner %s is not a valid planner. "
         "Planner names are: %s", planner_id.c_str(),

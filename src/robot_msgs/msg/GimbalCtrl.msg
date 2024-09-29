@@ -1,0 +1,25 @@
+std_msgs/Header header
+
+float64 yaw_cmd
+float64 pitch_cmd
+float64 shoot_cmd
+float64 friction_cmd
+float64 aiming_flag
+float64 pit
+float64 yaw
+float64 dis
+float64 tof
+float64 connect_status       
+float64 process_status       
+float64 cmd_mode                                         
+float64 spinning_mode                         
+float64 navigation_staus    
+float64 location_staus      
+float64 defend_mode          
+float64 auto_aim                  
+float64 robot_x            
+float64 robot_y             
+float64 robot_vx        
+float64 robot_vy          
+float64 robot_vw          
+float64 robot_gyro_yaw

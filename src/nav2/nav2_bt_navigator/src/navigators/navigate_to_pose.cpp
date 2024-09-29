@@ -45,9 +45,10 @@ NavigateToPoseNavigator::configure(
   // Odometry smoother object for getting current speed
   odom_smoother_ = odom_smoother;
 
-  self_client_ = rclcpp_action::create_client<ActionT>(node, getName());
+  self_client_ = rclcpp_action::create_client<ActionT>(node, getName());//这里getname的vscode的索引不对，索引到root的src里了，对应navigator.hpp的bt_action_server_
+  // self_client_ = rclcpp_action::create_client<ActionT>(node, "navigate_to_pose");
 
-  goal_sub_ = node->create_subscription<geometry_msgs::msg::PoseStamped>(
+  goal_sub_ = node->create_subscription<geometry_msgs::msg::PoseStamped>(//这里就是订阅goal_pose的地方
     "goal_pose",
     rclcpp::SystemDefaultsQoS(),
     std::bind(&NavigateToPoseNavigator::onGoalPoseReceived, this, std::placeholders::_1));
@@ -229,7 +230,7 @@ NavigateToPoseNavigator::onGoalPoseReceived(const geometry_msgs::msg::PoseStampe
 {
   ActionT::Goal goal;
   goal.pose = *pose;
-  self_client_->async_send_goal(goal);
+  self_client_->async_send_goal(goal);//客户端发送目标点
 }
 
 }  // namespace nav2_bt_navigator

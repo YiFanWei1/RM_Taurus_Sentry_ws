@@ -34,11 +34,19 @@ ament_auto_find_build_dependencies()
 ###########
 
 ament_auto_add_library(${PROJECT_NAME} SHARED
+  # src/robot_base.cpp
+  # src/crc.cpp
+  # src/serial_device.cpp
+  # src/filter.cpp
+  # src/vel_calibrator.cpp
+  # src/cxr_localization_ros2.cpp
+  # src/test.cpp
   src/remove_pointcloud.cpp
+  # msg/Num.msg
 )
 
 rclcpp_components_register_node(${PROJECT_NAME}
-  PLUGIN taurus::RemovePointcloud
+  PLUGIN taurus::Remove_pointcloud
   EXECUTABLE ${PROJECT_NAME}_node
 )
 # rclcpp_components_register_node(${PROJECT_NAME}

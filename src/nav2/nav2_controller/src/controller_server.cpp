@@ -193,12 +193,12 @@ ControllerServer::on_configure(const rclcpp_lifecycle::State & /*state*/)
     "Controller Server has %s controllers available.", controller_ids_concat_.c_str());
 
   odom_sub_ = std::make_unique<nav_2d_utils::OdomSubscriber>(node);
-  vel_publisher_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 1);
+  vel_publisher_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel_", 1);
 
   // Create the action server that we implement with our followPath method
   action_server_ = std::make_unique<ActionServer>(
     shared_from_this(),
-    "follow_path",
+    "follow_path",//服务端
     std::bind(&ControllerServer::computeControl, this),
     nullptr,
     std::chrono::milliseconds(500),
@@ -410,7 +410,7 @@ void ControllerServer::computeControl()
 
       updateGlobalPath();
 
-      computeAndPublishVelocity();
+      computeAndPublishVelocity();//计算并且发布速度
 
       if (isGoalReached()) {
         RCLCPP_INFO(get_logger(), "Reached the goal!");
@@ -486,7 +486,7 @@ void ControllerServer::computeAndPublishVelocity()
 
   try {
     cmd_vel_2d =
-      controllers_[current_controller_]->computeVelocityCommands(
+      controllers_[current_controller_]->computeVelocityCommands(//在这里调用了dwb的computeVelocityCommands进行速度计算
       pose,
       nav_2d_utils::twist2Dto3D(twist),
       goal_checkers_[current_goal_checker_].get());

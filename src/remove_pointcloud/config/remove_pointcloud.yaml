@@ -1,0 +1,3 @@
+/Remove_pointcloud: #类中节点名
+  ros__parameters: 
+    dis_diff: 0.3
