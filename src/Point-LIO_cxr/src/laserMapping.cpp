@@ -18,7 +18,7 @@
 #include <pcl/point_types.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/io/pcd_io.h>
-#include"sensor_msgs/sensor_msgs/msg/point_cloud2.hpp"
+#include"sensor_msgs/msg/point_cloud2.hpp"
 #include<tf2/transform_datatypes.h>
 #include<tf2_ros/transform_broadcaster.h>
 #include "geometry_msgs/msg/transform_stamped.hpp"
